@@ -8579,15 +8579,16 @@ function approve(token, context, prNumber) {
                     core.info('not approve');
                 }
             });
-            if (!flag) {
-                //if(pullRequest.s)
-                client.rest.pulls.createReview({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    pull_number: prNumber,
-                    event: "REQUEST_CHANGES",
-                });
-            }
+            // if(!flag)
+            // {
+            //  //if(pullRequest.s)
+            //   client.rest.pulls.createReview({
+            //     owner:context.repo.owner,
+            //     repo: context.repo.repo,
+            //     pull_number: prNumber,
+            //     event: "REQUEST_CHANGES",
+            //   });
+            // }
         }
         catch (error) {
             if (error instanceof request_error_1.RequestError) {

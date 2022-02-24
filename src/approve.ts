@@ -52,16 +52,16 @@ export async function approve(
         core.info('not approve');
       }
     });
-    if(!flag)
-    {
-     //if(pullRequest.s)
-      client.rest.pulls.createReview({
-        owner:context.repo.owner,
-        repo: context.repo.repo,
-        pull_number: prNumber,
-        event: "REQUEST_CHANGES",
-      });
-    }
+    // if(!flag)
+    // {
+    //  //if(pullRequest.s)
+    //   client.rest.pulls.createReview({
+    //     owner:context.repo.owner,
+    //     repo: context.repo.repo,
+    //     pull_number: prNumber,
+    //     event: "REQUEST_CHANGES",
+    //   });
+    // }
   } catch (error) {
     if (error instanceof RequestError) {
       switch (error.status) {
