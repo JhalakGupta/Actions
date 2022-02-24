@@ -33,7 +33,7 @@ export async function approve(
       if(!prNumber){
         return;
       }
-      if(labels.name == "no_code_review")
+      if(labels.name === "no_code_review")
       {
         client.rest.pulls.createReview({
           owner:context.repo.owner,
