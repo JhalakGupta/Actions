@@ -22,7 +22,7 @@ export async function approve(
 
   const client = github.getOctokit(token);
 
-  core.info(`Creating approving review for pull request #${prNumber}`);
+  core.info(`Jhalak creating approving review for pull request #${prNumber}`);
   try {
     const { data: pullRequest } = await client.rest.pulls.get({
       owner: github.context.repo.owner,
