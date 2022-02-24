@@ -29,6 +29,7 @@ export async function approve(
       repo: github.context.repo.repo,
       pull_number: prNumber,
     });
+    core.info(`number of labels #${pullRequest.labels.length}`)
     pullRequest.labels.forEach(labels => {
       if(!prNumber){
         return;
@@ -42,12 +43,12 @@ export async function approve(
           pull_number: prNumber,
           event: "APPROVE",
         });
+        core.info(`Approved pull request #${prNumber}`);
       }
       else {
         core.info('not approve');
       }
     });
-    core.info(`Approved pull request #${prNumber}`);
   } catch (error) {
     if (error instanceof RequestError) {
       switch (error.status) {
