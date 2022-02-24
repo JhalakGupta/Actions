@@ -22,21 +22,24 @@ export async function approve(
 
   const client = github.getOctokit(token);
 
-  core.info(`Jhalak creating approving review for pull request #${prNumber}`);
+  core.info(`Checking if the pull request #${prNumber} requires code review or not`);
   try {
     const { data: pullRequest } = await client.rest.pulls.get({
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
       pull_number: prNumber,
     });
-    core.info(`number of labels #${pullRequest.labels.length}`)
+    core.info(`number of labels #${pullRequest.labels.length}`);
+    const flag = false;
     pullRequest.labels.forEach(labels => {
       if(!prNumber){
         return;
       }
       if(labels.name === "no_code_review")
       {
-        core.info('no_code_review was found here');
+        const flag = true;
+        core.info(`Since the label for the pull request is set as no_code_review- 
+                  it will be approved by the bot`);
         client.rest.pulls.createReview({
           owner:context.repo.owner,
           repo: context.repo.repo,
@@ -49,6 +52,16 @@ export async function approve(
         core.info('not approve');
       }
     });
+    if(!flag)
+    {
+     //if(pullRequest.s)
+      client.rest.pulls.createReview({
+        owner:context.repo.owner,
+        repo: context.repo.repo,
+        pull_number: prNumber,
+        event: "REQUEST_CHANGES",
+      });
+    }
   } catch (error) {
     if (error instanceof RequestError) {
       switch (error.status) {
