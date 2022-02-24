@@ -35,12 +35,16 @@ export async function approve(
       }
       if(labels.name === "no_code_review")
       {
+        core.info('no_code_review was found here');
         client.rest.pulls.createReview({
           owner:context.repo.owner,
           repo: context.repo.repo,
           pull_number: prNumber,
           event: "APPROVE",
         });
+      }
+      else {
+        core.info('not approve');
       }
     });
     core.info(`Approved pull request #${prNumber}`);
