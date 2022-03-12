@@ -7,7 +7,6 @@ async function run() {
   const token = core.getInput("github-token", { required: true });
   const prNumber: number = parseInt(core.getInput("pull-request-number"), 10);
   try {
-    const token = core.getInput('token', { required: true })
 
     const result = await poll({
       token: token,
