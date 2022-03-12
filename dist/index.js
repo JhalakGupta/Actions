@@ -8549,8 +8549,6 @@ function approve(token, context, prNumber) {
                 "Make sure you're triggering this action on the `pull_request` or `pull_request_target` events.");
             return;
         }
-        //1. Add logic-> get the results from the checks (here we can possibily other customizations) 
-        //2. If any check fails->set the flag as false, and then don't proceed further on auto-approval action
         const client = github.getOctokit(token);
         core.info(`Checking if the pull request #${prNumber} requires code review or not`);
         try {
@@ -8672,7 +8670,6 @@ function run() {
         const token = core.getInput("github-token", { required: true });
         const prNumber = parseInt(core.getInput("pull-request-number"), 10);
         try {
-            const token = core.getInput('token', { required: true });
             const result = yield (0, poll_1.poll)({
                 token: token,
                 log: msg => core.info(msg),

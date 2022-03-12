@@ -10,6 +10,16 @@ inputs:
   pull-request-number:
     description: '(optional) The ID of a pull request to auto-approve. By default, this action tries to use the pull_request event payload.'
     required: false
+  ref:
+    description: 'The Git ref of the commit you want to poll for a passing check.'
+  repo:
+    description: 'The name of the GitHub repository you want to poll for a passing check.'
+  owner:
+    description: 'The owner of the GitHub repository you want to poll for a passing check.'
+  timeoutSeconds:
+    description: 'The number of seconds to wait for the check to complete.'
+  intervalSeconds:
+    description: 'The number of seconds to wait before each poll of the GitHub API.'
 runs:
   using: 'node12'
   main: 'dist/index.js'
