@@ -8665,6 +8665,7 @@ const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const approve_1 = __nccwpck_require__(6609);
 const poll_1 = __nccwpck_require__(4890);
+// Logic for getting the checkname from the config file
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         const token = core.getInput("github-token", { required: true });
@@ -8680,6 +8681,7 @@ function run() {
                 timeoutSeconds: parseInt(core.getInput('timeoutSeconds') || '600'),
                 intervalSeconds: parseInt(core.getInput('intervalSeconds') || '10')
             });
+            // If the checks are passing, then only call function to approve the pull request
             if (result === "success") {
                 if (!Number.isNaN(prNumber)) {
                     yield (0, approve_1.approve)(token, github.context, prNumber);

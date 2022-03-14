@@ -3,6 +3,7 @@ import * as github from "@actions/github";
 import { approve } from "./approve";
 import { poll } from './poll'
 
+// Logic for getting the checkname from the config file
 async function run() {
   const token = core.getInput("github-token", { required: true });
   const prNumber: number = parseInt(core.getInput("pull-request-number"), 10);
@@ -19,6 +20,7 @@ async function run() {
       timeoutSeconds: parseInt(core.getInput('timeoutSeconds') || '600'),
       intervalSeconds: parseInt(core.getInput('intervalSeconds') || '10')
     })
+    // If the checks are passing, then only call function to approve the pull request
     if (result === "success") {
       if (!Number.isNaN(prNumber)) {
         await approve(token, github.context, prNumber);
